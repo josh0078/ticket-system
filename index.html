@@ -534,6 +534,21 @@
   </div>
 </div>
 
+<!-- ══════════ MODAL: Passwort ══════════ -->
+<div class="modal-overlay" id="pw-modal" style="display:none;" onclick="closeModalOnBg(event,'pw-modal')">
+  <div class="modal" style="max-width:360px;text-align:center;">
+    <button class="modal-close" onclick="closePwModal()">×</button>
+    <div style="font-family:var(--font-head);font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--purple);margin-bottom:20px;">Support · Ticket</div>
+    <h3 class="gradient-text" style="font-size:22px;margin-bottom:6px;">Admin-Zugang</h3>
+    <p class="subtitle">Passwort eingeben um fortzufahren</p>
+    <div class="form-group" style="text-align:left;">
+      <input type="password" id="pw-input" class="input" placeholder="Passwort …" autocomplete="current-password" onkeydown="if(event.key==='Enter')checkPassword()">
+    </div>
+    <div id="pw-error" style="color:var(--danger);font-size:13px;margin-bottom:12px;display:none;">Falsches Passwort. Bitte nochmal.</div>
+    <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="checkPassword()">Einloggen →</button>
+  </div>
+</div>
+
 <!-- ══════════ MODAL: Einstellungen ══════════ -->
 <div class="modal-overlay" id="settings-modal" style="display:none;" onclick="closeModalOnBg(event,'settings-modal')">
   <div class="modal">
@@ -681,7 +696,32 @@ function checkSetup() {
   }
 }
 
+const ADMIN_PW = 'Joshua2024';
+
 function openSettings() {
+  document.getElementById('pw-input').value = '';
+  document.getElementById('pw-error').style.display = 'none';
+  document.getElementById('pw-modal').style.display = 'flex';
+  setTimeout(() => document.getElementById('pw-input').focus(), 80);
+}
+
+function closePwModal() {
+  document.getElementById('pw-modal').style.display = 'none';
+}
+
+function checkPassword() {
+  const val = document.getElementById('pw-input').value;
+  if (val === ADMIN_PW) {
+    closePwModal();
+    openSettingsModal();
+  } else {
+    document.getElementById('pw-error').style.display = 'block';
+    document.getElementById('pw-input').value = '';
+    document.getElementById('pw-input').focus();
+  }
+}
+
+function openSettingsModal() {
   const s = loadSettings();
   document.getElementById('s-anthropic-key').value = s.anthropicKey;
   document.getElementById('s-github-token').value  = s.githubToken;
