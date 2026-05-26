@@ -1002,11 +1002,20 @@ async function setTicketState(number, state, btn) {
     });
     if (!res.ok) throw new Error('API Fehler');
 
+    // Lokales Array sofort aktualisieren — kein Warten auf GitHub
+    const ticket = allTickets.find(t => t.number === number);
+    if (ticket) ticket.state = state;
+
+    const openCount   = allTickets.filter(t => t.state === 'open').length;
+    const closedCount = allTickets.filter(t => t.state === 'closed').length;
+    renderStats(openCount, closedCount);
+    filterTickets(currentFilter);
+
     const label = state === 'closed' ? 'Als erledigt markiert' : 'Wieder geöffnet';
     showToast(`✓ Ticket #${number} ${label}`, 'success');
-    loadTickets();
   } catch (err) {
     btn.disabled = false;
+    btn.textContent = state === 'closed' ? '✓ Als erledigt markieren' : 'Wieder öffnen';
     showToast(`Fehler: ${err.message}`, 'error');
   }
 }
