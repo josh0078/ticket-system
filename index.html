@@ -465,11 +465,50 @@
       animation: spin 0.7s linear infinite;
     }
 
+    /* ── Admin Panel ── */
+    .admin-tab {
+      padding: 10px 18px; font-size: 13px; font-weight: 500;
+      background: none; border: none; color: var(--text-3);
+      cursor: pointer; border-bottom: 2px solid transparent;
+      margin-bottom: -1px; transition: all 0.2s;
+      font-family: var(--font-body);
+    }
+    .admin-tab:hover { color: var(--text-2); }
+    .admin-tab-active { color: var(--purple) !important; border-bottom-color: var(--purple) !important; }
+
+    .stat-card {
+      padding: 20px 22px; border-radius: var(--radius);
+      background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+    }
+    .stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-3); margin-bottom: 6px; }
+    .stat-value { font-family: var(--font-head); font-size: 30px; font-weight: 700; }
+
+    .ticket-card {
+      padding: 20px 24px; border-radius: var(--radius);
+      background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+      margin-bottom: 14px; transition: all 0.2s; animation: fadeUp 0.35s ease both;
+      cursor: pointer;
+    }
+    .ticket-card:hover { border-color: var(--border-h); box-shadow: 0 0 28px rgba(168,85,247,0.1); transform: translateY(-1px); }
+    .ticket-card.closed { opacity: 0.55; }
+    .ticket-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+    .ticket-card-title { font-family: var(--font-head); font-size: 16px; font-weight: 700; line-height: 1.3; flex: 1; }
+    .ticket-card-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+    .badge-area { padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; background: rgba(99,102,241,0.12); border: 1px solid rgba(99,102,241,0.3); color: var(--indigo); }
+    .badge-high   { background: rgba(248,113,113,0.12); border: 1px solid rgba(248,113,113,0.3); color: var(--danger); }
+    .badge-mid    { background: rgba(251,191,36,0.12);  border: 1px solid rgba(251,191,36,0.3);  color: var(--warning); }
+    .badge-low    { background: rgba(74,222,128,0.12);  border: 1px solid rgba(74,222,128,0.3);  color: var(--success); }
+    .badge-open   { background: rgba(168,85,247,0.12); border: 1px solid rgba(168,85,247,0.3); color: var(--purple); }
+    .badge-closed { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: var(--text-3); }
+    .ticket-card-meta { font-size: 12px; color: var(--text-3); }
+    .ticket-card-actions { display: flex; gap: 8px; margin-top: 14px; border-top: 1px solid var(--border); padding-top: 14px; }
+
     @media (max-width: 600px) {
       .chat-layout { padding: 0 14px; }
       .msg-bubble  { max-width: 88%; font-size: 14px; }
       .ticket-ready-box { margin-left: 0; }
       .topbar { padding: 0 14px; }
+      #admin-stats { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
@@ -484,7 +523,11 @@
     <div class="topbar-right">
       <div class="status-dot" id="status-dot"></div>
       <span class="status-label" id="status-label">KI bereit</span>
-      <button class="btn btn-ghost btn-sm btn-icon" onclick="openSettings()" title="Einstellungen" style="margin-left:4px;">
+      <button class="btn btn-ghost btn-sm" onclick="openAdmin()" title="Admin" style="margin-left:4px;font-size:13px;">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Admin
+      </button>
+      <button class="btn btn-ghost btn-sm btn-icon" onclick="openSettings()" title="Einstellungen" style="margin-left:2px;">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
           <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
         </svg>
@@ -585,6 +628,65 @@
   </div>
 </div>
 
+<!-- ══════════ ADMIN PANEL ══════════ -->
+<div id="admin-panel" style="display:none;position:fixed;inset:0;z-index:500;background:var(--bg);overflow-y:auto;">
+  <div class="bg-orbs"></div>
+
+  <!-- Admin Topbar -->
+  <div class="topbar" style="position:sticky;">
+    <div class="topbar-inner">
+      <div style="display:flex;align-items:center;gap:16px;">
+        <button onclick="closeAdmin()" style="background:none;border:none;color:var(--text-2);cursor:pointer;display:flex;align-items:center;gap:6px;font-family:var(--font-body);font-size:13px;transition:color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-2)'">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+          Zurück zum Chat
+        </button>
+        <div class="topbar-brand gradient-text">Admin · Tickets</div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <button class="btn btn-ghost btn-sm" onclick="loadTickets()" id="refresh-btn">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+          Aktualisieren
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:1000px;margin:0 auto;padding:36px 24px 80px;position:relative;z-index:1;">
+
+    <!-- Stats -->
+    <div id="admin-stats" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px;"></div>
+
+    <!-- Filter Tabs -->
+    <div style="display:flex;gap:4px;border-bottom:1px solid var(--border);margin-bottom:28px;">
+      <button class="admin-tab admin-tab-active" id="tab-open"   onclick="filterTickets('open')">Offen</button>
+      <button class="admin-tab"                  id="tab-closed" onclick="filterTickets('closed')">Erledigt</button>
+      <button class="admin-tab"                  id="tab-all"    onclick="filterTickets('all')">Alle</button>
+    </div>
+
+    <!-- Ticket Liste -->
+    <div id="ticket-list"></div>
+
+    <!-- Loading / Empty -->
+    <div id="tickets-loading" style="text-align:center;padding:60px 0;color:var(--text-3);display:none;">
+      <div style="width:32px;height:32px;border-radius:50%;border:2px solid rgba(168,85,247,0.2);border-top-color:var(--purple);animation:spin 0.8s linear infinite;margin:0 auto 16px;"></div>
+      <p style="font-size:14px;">Tickets werden geladen …</p>
+    </div>
+    <div id="tickets-empty" style="text-align:center;padding:60px 0;color:var(--text-3);display:none;">
+      <div style="font-size:40px;margin-bottom:16px;">📭</div>
+      <p style="font-size:16px;color:var(--text-2);font-family:var(--font-head);margin-bottom:6px;">Keine Tickets gefunden</p>
+      <p style="font-size:13px;">In dieser Kategorie gibt es noch keine Einträge.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ MODAL: Ticket Detail ══════════ -->
+<div class="modal-overlay" id="detail-modal" style="display:none;" onclick="closeModalOnBg(event,'detail-modal')">
+  <div class="modal" style="max-width:640px;max-height:80vh;overflow-y:auto;">
+    <button class="modal-close" onclick="document.getElementById('detail-modal').style.display='none'">×</button>
+    <div id="detail-content"></div>
+  </div>
+</div>
+
 <!-- Toast container -->
 <div class="toast-container" id="toast-container"></div>
 
@@ -595,35 +697,32 @@
    ═══════════════════════════════════════════════════════ */
 
 // ── System Prompt ──
-const SYSTEM_PROMPT = `Du bist Max, ein empathischer und technisch versierter Support-Mitarbeiter einer Digitalagentur, die professionelle Webseiten, Social Media Management und KI-Automatisierungen anbietet.
+const SYSTEM_PROMPT = `Du bist Max, ein freundlicher und verständnisvoller Support-Mitarbeiter einer Digitalagentur, die professionelle Webseiten, Social Media Management und KI-Automatisierungen anbietet.
 
 DEINE AUFGABE:
-Verstehe das Problem des Kunden so präzise wie möglich, damit das technische Team sofort handeln kann – ohne weitere Rückfragen.
+Verstehe das Problem des Kunden so gut wie möglich, damit das Team sofort helfen kann. Sprich IMMER in einfacher, klarer Sprache – keine technischen Fachbegriffe, keine IT-Begriffe, die ein normaler Kunde nicht kennt.
 
 VORGEHEN:
 1. Begrüße den Kunden herzlich und frage nach seinem Anliegen
 2. Identifiziere den Bereich: Webseite · Social Media · KI-Automatisierung · Sonstiges
-3. Stelle dynamische Rückfragen – IMMER nur EINE Frage pro Nachricht:
+3. Stelle einfache, verständliche Rückfragen – IMMER nur EINE Frage pro Nachricht:
 
    Bei Webseite/Website:
-   → URL der betroffenen Seite
-   → Welcher Browser & Gerät?
-   → Genaue Fehlermeldung (falls vorhanden)
-   → Seit wann tritt das Problem auf?
-   → Passiert es immer oder nur manchmal?
+   → Welche Seite ist betroffen? (z.B. "die Startseite" oder "die Kontaktseite")
+   → Was genau passiert – oder was passiert NICHT, was eigentlich passieren sollte?
+   → Seit wann besteht das Problem?
+   → Passiert das immer, oder nur manchmal?
 
    Bei Social Media:
-   → Welche Plattform (Instagram, Facebook, LinkedIn, TikTok, …)?
-   → Art des Problems (Zugang, Inhalte, Reichweite, Anzeigen, …)?
-   → Fehlermeldung vorhanden?
+   → Auf welcher Plattform? (Instagram, Facebook, LinkedIn, TikTok, …)
+   → Was ist das Problem genau? (z.B. kein Zugang, Beitrag wird nicht angezeigt, …)
    → Seit wann?
 
    Bei KI-Automatisierung:
-   → Welche Tools sind beteiligt (Make, n8n, Zapier, OpenAI, …)?
-   → Welche APIs oder Dienste sind verbunden?
-   → Wann tritt der Fehler auf (immer, bei bestimmten Daten, …)?
-   → Genaue Fehlermeldung oder Fehlercode?
-   → Was wurde zuletzt am Workflow geändert?
+   → Welches Tool oder welchen Dienst nutzt du dafür? (z.B. Make, n8n, einen Chatbot, …)
+   → Was soll eigentlich passieren, und was passiert stattdessen?
+   → Seit wann tritt das auf?
+   → Passiert es immer oder nur in bestimmten Situationen?
 
 4. Sobald du genug Informationen hast (nach mindestens 3–4 Rückfragen), erstelle eine strukturierte Zusammenfassung auf Deutsch:
 
@@ -641,10 +740,12 @@ VORGEHEN:
 WICHTIGE REGELN:
 - Antworte IMMER auf Deutsch
 - Stelle IMMER nur eine einzige Frage auf einmal
-- Sei freundlich, professionell und direkt
-- Dringlichkeit "Hoch" = Webseite down, Umsatzverlust, System komplett ausgefallen
-- Dringlichkeit "Mittel" = Funktionsfehler, der den Betrieb einschränkt
-- Dringlichkeit "Niedrig" = Kleinigkeiten, Design, Verbesserungswünsche`;
+- NIEMALS technische Begriffe wie: Entwicklerkonsole, DevTools, Cache leeren, Fehlercode, API, Server, DNS, HTTP, Browser-Inspektor, Terminal oder ähnliches
+- Wenn der Kunde selbst eine Fehlermeldung erwähnt, darf sie ins Ticket – aber frage NIEMALS aktiv danach
+- Sei geduldig, freundlich und verständnisvoll
+- Dringlichkeit "Hoch" = Webseite nicht erreichbar, Umsatzverlust, System komplett ausgefallen
+- Dringlichkeit "Mittel" = Etwas funktioniert nicht richtig, schränkt aber den Betrieb ein
+- Dringlichkeit "Niedrig" = Kleinigkeit, Verbesserungswunsch, optisches Problem`;
 
 // ── State ──
 let chatHistory = [];
@@ -697,8 +798,19 @@ function checkSetup() {
 }
 
 const ADMIN_PW = 'Joshua2024';
+let pwTarget   = 'settings'; // 'settings' | 'admin'
 
 function openSettings() {
+  pwTarget = 'settings';
+  showPwModal();
+}
+
+function openAdmin() {
+  pwTarget = 'admin';
+  showPwModal();
+}
+
+function showPwModal() {
   document.getElementById('pw-input').value = '';
   document.getElementById('pw-error').style.display = 'none';
   document.getElementById('pw-modal').style.display = 'flex';
@@ -713,7 +825,8 @@ function checkPassword() {
   const val = document.getElementById('pw-input').value;
   if (val === ADMIN_PW) {
     closePwModal();
-    openSettingsModal();
+    if (pwTarget === 'admin') openAdminPanel();
+    else openSettingsModal();
   } else {
     document.getElementById('pw-error').style.display = 'block';
     document.getElementById('pw-input').value = '';
@@ -732,6 +845,203 @@ function openSettingsModal() {
 
 function closeSettings() {
   document.getElementById('settings-modal').style.display = 'none';
+}
+
+// ── Admin Panel ──
+let allTickets   = [];
+let currentFilter = 'open';
+
+function openAdminPanel() {
+  document.getElementById('admin-panel').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+  loadTickets();
+}
+
+function closeAdmin() {
+  document.getElementById('admin-panel').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+async function loadTickets() {
+  const s = loadSettings();
+  if (!s.githubToken || !s.githubOwner || !s.githubRepo) {
+    showToast('GitHub-Daten fehlen in den Einstellungen', 'warning');
+    return;
+  }
+
+  document.getElementById('tickets-loading').style.display = 'block';
+  document.getElementById('ticket-list').style.display = 'none';
+  document.getElementById('tickets-empty').style.display = 'none';
+
+  try {
+    const [openRes, closedRes] = await Promise.all([
+      fetch(`https://api.github.com/repos/${s.githubOwner}/${s.githubRepo}/issues?state=open&per_page=50`, {
+        headers: { 'Authorization': `token ${s.githubToken}`, 'Accept': 'application/vnd.github.v3+json' }
+      }),
+      fetch(`https://api.github.com/repos/${s.githubOwner}/${s.githubRepo}/issues?state=closed&per_page=50`, {
+        headers: { 'Authorization': `token ${s.githubToken}`, 'Accept': 'application/vnd.github.v3+json' }
+      }),
+    ]);
+
+    if (!openRes.ok || !closedRes.ok) throw new Error('GitHub API Fehler');
+
+    const open   = await openRes.json();
+    const closed = await closedRes.json();
+    allTickets   = [...open, ...closed].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+    renderStats(open.length, closed.length);
+    filterTickets(currentFilter);
+  } catch (err) {
+    showToast(`Fehler beim Laden: ${err.message}`, 'error');
+  } finally {
+    document.getElementById('tickets-loading').style.display = 'none';
+  }
+}
+
+function renderStats(openCount, closedCount) {
+  const today = allTickets.filter(t => {
+    const d = new Date(t.created_at);
+    const n = new Date();
+    return d.toDateString() === n.toDateString();
+  }).length;
+
+  document.getElementById('admin-stats').innerHTML = `
+    <div class="stat-card">
+      <div class="stat-label">Offen</div>
+      <div class="stat-value" style="color:var(--purple)">${openCount}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Erledigt</div>
+      <div class="stat-value" style="color:var(--text-3)">${closedCount}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Heute erstellt</div>
+      <div class="stat-value" style="color:var(--success)">${today}</div>
+    </div>
+  `;
+}
+
+function filterTickets(filter) {
+  currentFilter = filter;
+  ['open','closed','all'].forEach(f => {
+    document.getElementById(`tab-${f}`).classList.toggle('admin-tab-active', f === filter);
+  });
+
+  const filtered = allTickets.filter(t => {
+    if (filter === 'open')   return t.state === 'open';
+    if (filter === 'closed') return t.state === 'closed';
+    return true;
+  });
+
+  const list = document.getElementById('ticket-list');
+  if (filtered.length === 0) {
+    list.style.display = 'none';
+    document.getElementById('tickets-empty').style.display = 'block';
+    return;
+  }
+
+  document.getElementById('tickets-empty').style.display = 'none';
+  list.style.display = 'block';
+  list.innerHTML = filtered.map((t, i) => renderTicketCard(t, i)).join('');
+}
+
+function extractMeta(body) {
+  const area  = (body?.match(/\*\*Bereich\*\*\s*\|\s*([^\n|]+)/) || [])[1]?.trim() || '–';
+  const urg   = (body?.match(/\*\*Dringlichkeit\*\*\s*\|\s*([^\n|]+)/) || [])[1]?.trim() || '–';
+  return { area, urg };
+}
+
+function urgencyBadge(urg) {
+  if (urg.includes('Hoch'))   return `<span class="badge-area badge-high">🔴 Hoch</span>`;
+  if (urg.includes('Mittel')) return `<span class="badge-area badge-mid">🟡 Mittel</span>`;
+  if (urg.includes('Niedrig')) return `<span class="badge-area badge-low">🟢 Niedrig</span>`;
+  return `<span class="badge-area">${urg}</span>`;
+}
+
+function renderTicketCard(ticket, idx) {
+  const { area, urg } = extractMeta(ticket.body);
+  const date = new Date(ticket.created_at).toLocaleString('de-DE', { dateStyle: 'short', timeStyle: 'short' });
+  const isOpen = ticket.state === 'open';
+
+  return `
+    <div class="ticket-card ${isOpen ? '' : 'closed'}" style="animation-delay:${idx * 0.04}s">
+      <div class="ticket-card-top">
+        <div class="ticket-card-title">${ticket.title}</div>
+        <span class="badge-area ${isOpen ? 'badge-open' : 'badge-closed'}">${isOpen ? 'Offen' : 'Erledigt'}</span>
+      </div>
+      <div class="ticket-card-badges">
+        <span class="badge-area">${area}</span>
+        ${urgencyBadge(urg)}
+      </div>
+      <div class="ticket-card-meta">Erstellt: ${date} · #${ticket.number}</div>
+      <div class="ticket-card-actions">
+        <button class="btn btn-ghost btn-sm" onclick="showTicketDetail(${ticket.number})">Details ansehen</button>
+        ${isOpen
+          ? `<button class="btn btn-sm" style="background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.3);color:var(--success);" onclick="setTicketState(${ticket.number},'closed',this)">✓ Als erledigt markieren</button>`
+          : `<button class="btn btn-ghost btn-sm" onclick="setTicketState(${ticket.number},'open',this)">Wieder öffnen</button>`
+        }
+        <a href="${ticket.html_url}" target="_blank" rel="noopener" class="btn btn-ghost btn-sm" style="margin-left:auto;">
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  `;
+}
+
+async function setTicketState(number, state, btn) {
+  const s = loadSettings();
+  btn.disabled = true;
+  btn.textContent = '…';
+
+  try {
+    const res = await fetch(`https://api.github.com/repos/${s.githubOwner}/${s.githubRepo}/issues/${number}`, {
+      method: 'PATCH',
+      headers: { 'Authorization': `token ${s.githubToken}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ state }),
+    });
+    if (!res.ok) throw new Error('API Fehler');
+
+    const label = state === 'closed' ? 'Als erledigt markiert' : 'Wieder geöffnet';
+    showToast(`✓ Ticket #${number} ${label}`, 'success');
+    loadTickets();
+  } catch (err) {
+    btn.disabled = false;
+    showToast(`Fehler: ${err.message}`, 'error');
+  }
+}
+
+async function showTicketDetail(number) {
+  const s      = loadSettings();
+  const ticket = allTickets.find(t => t.number === number);
+  if (!ticket) return;
+
+  const { area, urg } = extractMeta(ticket.body);
+  const date = new Date(ticket.created_at).toLocaleString('de-DE', { dateStyle: 'long', timeStyle: 'short' });
+  const body = (ticket.body || '')
+    .replace(/\[\[TICKET_READY\]\]/g, '')
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\n/g, '<br>');
+
+  document.getElementById('detail-content').innerHTML = `
+    <div style="margin-bottom:20px;">
+      <div style="font-size:12px;color:var(--text-3);margin-bottom:8px;">Ticket #${ticket.number} · ${date}</div>
+      <h3 class="gradient-text" style="font-size:18px;line-height:1.3;margin-bottom:14px;">${ticket.title}</h3>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <span class="badge-area">${area}</span>
+        ${urgencyBadge(urg)}
+        <span class="badge-area ${ticket.state === 'open' ? 'badge-open' : 'badge-closed'}">${ticket.state === 'open' ? 'Offen' : 'Erledigt'}</span>
+      </div>
+    </div>
+    <div style="background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px;font-size:13px;line-height:1.7;color:var(--text-2);max-height:340px;overflow-y:auto;">
+      ${body}
+    </div>
+    <div style="display:flex;gap:10px;margin-top:20px;justify-content:flex-end;">
+      <a href="${ticket.html_url}" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Auf GitHub öffnen</a>
+      <button class="btn btn-ghost btn-sm" onclick="document.getElementById('detail-modal').style.display='none'">Schließen</button>
+    </div>
+  `;
+  document.getElementById('detail-modal').style.display = 'flex';
 }
 
 function closeModalOnBg(e, id) {
