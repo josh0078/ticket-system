@@ -10,22 +10,23 @@
   <style>
     /* ============================================
        TICKET SYSTEM — Design-System
-       Gradient Glow · Schwarz · Lila · Blau
+       Gradient Glow · Schwarz · Blau · Cyan
+       MJ. Digital Branding
        ============================================ */
 
     :root {
       --bg:        #07070f;
-      --bg2:       #0d0d1a;
-      --bg3:       #12121f;
-      --purple:    #a855f7;
-      --purple-d:  #7c3aed;
-      --indigo:    #6366f1;
-      --blue:      #3b82f6;
-      --glow-p:    rgba(168, 85, 247, 0.18);
-      --glow-i:    rgba(99, 102, 241, 0.15);
-      --glow-b:    rgba(59, 130, 246, 0.12);
-      --border:    rgba(168, 85, 247, 0.18);
-      --border-h:  rgba(168, 85, 247, 0.4);
+      --bg2:       #0a0d1a;
+      --bg3:       #0f1220;
+      --purple:    #2563eb;
+      --purple-d:  #1d4ed8;
+      --indigo:    #06b6d4;
+      --blue:      #0ea5e9;
+      --glow-p:    rgba(37, 99, 235, 0.18);
+      --glow-i:    rgba(6, 182, 212, 0.15);
+      --glow-b:    rgba(14, 165, 233, 0.12);
+      --border:    rgba(37, 99, 235, 0.2);
+      --border-h:  rgba(6, 182, 212, 0.5);
       --text:      rgba(255, 255, 255, 0.88);
       --text-2:    rgba(255, 255, 255, 0.5);
       --text-3:    rgba(255, 255, 255, 0.25);
@@ -36,7 +37,7 @@
       --font-body: 'DM Sans', sans-serif;
       --radius:    14px;
       --radius-sm: 8px;
-      --shadow:    0 0 30px rgba(168, 85, 247, 0.12);
+      --shadow:    0 0 30px rgba(37, 99, 235, 0.15);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -59,7 +60,7 @@
     .bg-orbs::before {
       content: '';
       position: absolute; width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(168,85,247,0.12) 0%, transparent 65%);
+      background: radial-gradient(circle, rgba(37,99,235,0.12) 0%, transparent 65%);
       top: -200px; left: -100px; border-radius: 50%;
       animation: orbFloat 20s ease-in-out infinite alternate;
     }
@@ -90,8 +91,8 @@
       40%           { transform: translateY(-6px); opacity: 1; }
     }
     @keyframes pulse-glow {
-      0%, 100% { box-shadow: 0 0 20px rgba(168,85,247,0.25); }
-      50%       { box-shadow: 0 0 40px rgba(168,85,247,0.5); }
+      0%, 100% { box-shadow: 0 0 20px rgba(37,99,235,0.25); }
+      50%       { box-shadow: 0 0 40px rgba(37,99,235,0.5); }
     }
     @keyframes slideIn {
       from { opacity: 0; transform: translateY(10px); }
@@ -104,7 +105,7 @@
     /* ── Typography ── */
     h1, h2, h3, h4 { font-family: var(--font-head); }
     .gradient-text {
-      background: linear-gradient(135deg, #a855f7 0%, #6366f1 50%, #3b82f6 100%);
+      background: linear-gradient(135deg, #2563eb 0%, #06b6d4 50%, #3b82f6 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -120,18 +121,18 @@
     .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
     .btn-primary {
       background: linear-gradient(135deg, var(--purple), var(--indigo));
-      color: white; box-shadow: 0 0 20px rgba(168,85,247,0.3);
+      color: white; box-shadow: 0 0 20px rgba(37,99,235,0.3);
     }
     .btn-primary:not(:disabled):hover {
-      box-shadow: 0 0 30px rgba(168,85,247,0.5);
+      box-shadow: 0 0 30px rgba(37,99,235,0.5);
       transform: translateY(-1px);
     }
     .btn-ghost {
-      background: rgba(168,85,247,0.08);
+      background: rgba(37,99,235,0.08);
       border: 1px solid var(--border); color: var(--text-2);
     }
     .btn-ghost:hover {
-      background: rgba(168,85,247,0.15);
+      background: rgba(37,99,235,0.15);
       border-color: var(--border-h); color: var(--text);
     }
     .btn-success {
@@ -152,7 +153,7 @@
     }
     .input:focus {
       border-color: var(--purple);
-      box-shadow: 0 0 0 3px rgba(168,85,247,0.12);
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
     }
     .input::placeholder { color: var(--text-3); }
     .input[type="password"] { letter-spacing: 2px; }
@@ -179,7 +180,7 @@
       border: 1px solid var(--border);
       border-radius: var(--radius); padding: 32px;
       width: 100%; max-width: 480px;
-      box-shadow: 0 0 60px rgba(168,85,247,0.2);
+      box-shadow: 0 0 60px rgba(37,99,235,0.2);
       animation: fadeUp 0.3s ease;
       position: relative;
     }
@@ -214,8 +215,8 @@
     /* ── Scrollbar ── */
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(168,85,247,0.25); border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(168,85,247,0.45); }
+    ::-webkit-scrollbar-thumb { background: rgba(37,99,235,0.25); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(37,99,235,0.45); }
 
     /* ══════════════════════════════════
        TOPBAR
@@ -271,8 +272,8 @@
       justify-content: center; font-size: 14px; font-weight: 700;
       font-family: var(--font-head);
     }
-    .msg.ai   .msg-avatar { background: rgba(168,85,247,0.15); border: 1px solid var(--border); color: var(--purple); }
-    .msg.user .msg-avatar { background: rgba(99,102,241,0.2); border: 1px solid rgba(99,102,241,0.3); color: var(--indigo); }
+    .msg.ai   .msg-avatar { background: rgba(37,99,235,0.15); border: 1px solid var(--border); color: var(--purple); }
+    .msg.user .msg-avatar { background: rgba(6,182,212,0.2); border: 1px solid rgba(6,182,212,0.3); color: var(--indigo); }
 
     .msg-bubble {
       max-width: 72%; padding: 14px 18px;
@@ -284,8 +285,8 @@
       border-bottom-left-radius: 4px;
     }
     .msg.user .msg-bubble {
-      background: linear-gradient(135deg, rgba(168,85,247,0.25), rgba(99,102,241,0.2));
-      border: 1px solid rgba(168,85,247,0.3);
+      background: linear-gradient(135deg, rgba(37,99,235,0.25), rgba(6,182,212,0.2));
+      border: 1px solid rgba(37,99,235,0.3);
       border-bottom-right-radius: 4px; color: rgba(255,255,255,0.92);
     }
     .msg-bubble p { margin-bottom: 10px; }
@@ -320,8 +321,8 @@
 
     /* ── Ticket ready box ── */
     .ticket-ready-box {
-      background: rgba(168,85,247,0.07);
-      border: 1px solid rgba(168,85,247,0.3);
+      background: rgba(37,99,235,0.07);
+      border: 1px solid rgba(37,99,235,0.3);
       border-radius: var(--radius); padding: 20px 24px;
       margin: 4px 0 0 46px;
       animation: slideIn 0.4s ease both;
@@ -335,7 +336,7 @@
       content: '';
       width: 6px; height: 6px; border-radius: 50%;
       background: var(--purple); display: block;
-      box-shadow: 0 0 8px rgba(168,85,247,0.8);
+      box-shadow: 0 0 8px rgba(37,99,235,0.8);
     }
     .ticket-ready-box p { font-size: 13px; color: var(--text-2); margin-bottom: 14px; }
     .submit-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
@@ -346,11 +347,11 @@
       color: white; border: none; border-radius: var(--radius-sm);
       font-family: var(--font-body); font-size: 14px; font-weight: 600;
       cursor: pointer; transition: all 0.2s;
-      box-shadow: 0 0 20px rgba(168,85,247,0.35);
+      box-shadow: 0 0 20px rgba(37,99,235,0.35);
       animation: pulse-glow 2.5s ease infinite;
     }
     .submit-btn:not(:disabled):hover {
-      box-shadow: 0 0 35px rgba(168,85,247,0.55);
+      box-shadow: 0 0 35px rgba(37,99,235,0.55);
       transform: translateY(-1px);
     }
     .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; animation: none; transform: none; }
@@ -372,7 +373,7 @@
     /* ── Input area ── */
     .chat-input-area {
       padding: 16px 0 28px; flex-shrink: 0;
-      border-top: 1px solid rgba(168,85,247,0.1);
+      border-top: 1px solid rgba(37,99,235,0.1);
     }
     .input-row {
       display: flex; gap: 10px; align-items: flex-end;
@@ -390,7 +391,7 @@
     }
     .chat-input:focus {
       border-color: var(--purple);
-      box-shadow: 0 0 0 3px rgba(168,85,247,0.1);
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
     }
     .chat-input::placeholder { color: var(--text-3); }
     .chat-input:disabled { opacity: 0.5; }
@@ -399,10 +400,10 @@
       background: linear-gradient(135deg, var(--purple), var(--indigo));
       border: none; cursor: pointer; color: white;
       display: flex; align-items: center; justify-content: center;
-      transition: all 0.2s; box-shadow: 0 0 16px rgba(168,85,247,0.3);
+      transition: all 0.2s; box-shadow: 0 0 16px rgba(37,99,235,0.3);
     }
     .send-btn:hover:not(:disabled) {
-      box-shadow: 0 0 24px rgba(168,85,247,0.5);
+      box-shadow: 0 0 24px rgba(37,99,235,0.5);
       transform: translateY(-1px);
     }
     .send-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
@@ -416,7 +417,7 @@
     }
     .empty-chat-icon {
       width: 64px; height: 64px; border-radius: 50%;
-      background: rgba(168,85,247,0.1);
+      background: rgba(37,99,235,0.1);
       border: 1px solid var(--border);
       display: flex; align-items: center; justify-content: center; font-size: 28px;
       margin-bottom: 4px;
@@ -489,16 +490,16 @@
       margin-bottom: 14px; transition: all 0.2s; animation: fadeUp 0.35s ease both;
       cursor: pointer;
     }
-    .ticket-card:hover { border-color: var(--border-h); box-shadow: 0 0 28px rgba(168,85,247,0.1); transform: translateY(-1px); }
+    .ticket-card:hover { border-color: var(--border-h); box-shadow: 0 0 28px rgba(37,99,235,0.1); transform: translateY(-1px); }
     .ticket-card.closed { opacity: 0.55; }
     .ticket-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
     .ticket-card-title { font-family: var(--font-head); font-size: 16px; font-weight: 700; line-height: 1.3; flex: 1; }
     .ticket-card-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
-    .badge-area { padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; background: rgba(99,102,241,0.12); border: 1px solid rgba(99,102,241,0.3); color: var(--indigo); }
+    .badge-area { padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; background: rgba(6,182,212,0.12); border: 1px solid rgba(6,182,212,0.3); color: var(--indigo); }
     .badge-high   { background: rgba(248,113,113,0.12); border: 1px solid rgba(248,113,113,0.3); color: var(--danger); }
     .badge-mid    { background: rgba(251,191,36,0.12);  border: 1px solid rgba(251,191,36,0.3);  color: var(--warning); }
     .badge-low    { background: rgba(74,222,128,0.12);  border: 1px solid rgba(74,222,128,0.3);  color: var(--success); }
-    .badge-open   { background: rgba(168,85,247,0.12); border: 1px solid rgba(168,85,247,0.3); color: var(--purple); }
+    .badge-open   { background: rgba(37,99,235,0.12); border: 1px solid rgba(37,99,235,0.3); color: var(--purple); }
     .badge-closed { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: var(--text-3); }
     .ticket-card-meta { font-size: 12px; color: var(--text-3); }
     .ticket-card-actions { display: flex; gap: 8px; margin-top: 14px; border-top: 1px solid var(--border); padding-top: 14px; }
@@ -519,7 +520,10 @@
 <!-- ══════════ TOPBAR ══════════ -->
 <div class="topbar">
   <div class="topbar-inner">
-    <div class="topbar-brand gradient-text">Support · Ticket</div>
+    <div style="display:flex;align-items:center;gap:12px;">
+        <img src="logo.png" alt="MJ. Digital" style="height:36px;width:auto;object-fit:contain;">
+        <div class="topbar-brand" style="color:rgba(255,255,255,0.5);font-size:12px;letter-spacing:1.5px;">Support · Ticket</div>
+      </div>
     <div class="topbar-right">
       <div class="status-dot" id="status-dot"></div>
       <span class="status-label" id="status-label">KI bereit</span>
@@ -635,7 +639,10 @@
           <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
           Zurück zum Chat
         </button>
-        <div class="topbar-brand gradient-text">Admin · Tickets</div>
+        <div style="display:flex;align-items:center;gap:12px;">
+            <img src="logo.png" alt="MJ. Digital" style="height:32px;width:auto;object-fit:contain;">
+            <div class="topbar-brand" style="color:rgba(255,255,255,0.5);font-size:12px;letter-spacing:1.5px;">Admin · Tickets</div>
+          </div>
       </div>
       <div style="display:flex;gap:8px;align-items:center;">
         <button class="btn btn-ghost btn-sm" onclick="loadTickets()" id="refresh-btn">
@@ -668,7 +675,7 @@
 
     <!-- Loading / Empty -->
     <div id="tickets-loading" style="text-align:center;padding:60px 0;color:var(--text-3);display:none;">
-      <div style="width:32px;height:32px;border-radius:50%;border:2px solid rgba(168,85,247,0.2);border-top-color:var(--purple);animation:spin 0.8s linear infinite;margin:0 auto 16px;"></div>
+      <div style="width:32px;height:32px;border-radius:50%;border:2px solid rgba(37,99,235,0.2);border-top-color:var(--purple);animation:spin 0.8s linear infinite;margin:0 auto 16px;"></div>
       <p style="font-size:14px;">Tickets werden geladen …</p>
     </div>
     <div id="tickets-empty" style="text-align:center;padding:60px 0;color:var(--text-3);display:none;">
@@ -1133,7 +1140,7 @@ function renderTyping() {
   el.className = 'typing-bubble';
   el.id        = 'typing-indicator';
   el.innerHTML = `
-    <div class="msg-avatar" style="width:34px;height:34px;border-radius:50%;background:rgba(168,85,247,0.15);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:14px;font-family:var(--font-head);color:var(--purple);">KI</div>
+    <div class="msg-avatar" style="width:34px;height:34px;border-radius:50%;background:rgba(37,99,235,0.15);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:14px;font-family:var(--font-head);color:var(--purple);">KI</div>
     <div class="typing-dots"><span></span><span></span><span></span></div>
   `;
   win.appendChild(el);
